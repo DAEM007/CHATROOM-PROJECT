@@ -1,6 +1,9 @@
 import { initializeApp } from "firebase/app";
 import { 
-  getFirestore, collection
+  getFirestore, collection, onSnapshot,
+  addDoc,
+  query,
+  orderBy, serverTimestamp
  } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -21,38 +24,62 @@ const db = getFirestore();
 // init collection reference
 const colRef = collection(db, 'chats');
 
-// auliualiua
+// Queries
+const q = query(colRef, orderBy('createdAt'));
+
+// Setting up a real-time listener to get new chats
+onSnapshot(q, (snapshot) => {
+  let chats = [];
+  snapshot.docs.forEach((doc) => {
+    chats.push({ ...doc.data(), id: doc.id })
+  })
+  console.log(chats);
+});
 
 
 
-// CLASS SCRIPT
+
+// CLASS OF CHATROOM
 class Chatroom {
   constructor(room, username){
     this.room = room;
     this.username = username;
     this.chats = colRef;
   }
+  //  Adding a new chat document to the chat collection
   async addChat(message){
-    // format of a chat object
-    const now = new Date();
-    const chat = {
-      message: message,
-      username: this.username,
-      room: this.room
-      // created_At: 
-    };
+    // const addChatForm = document.querySelector('.new-chat');
+    // addChatForm.addEventListener('submit', e => {
+    //   e.preventDefault();
+
+      addDoc(colRef, {
+        // Format of a chat
+        // message: addChatForm.id.value,
+        message: message,
+        username: this.username,
+        room: this.room,
+        created_at: serverTimestamp()
+      })
+      // .then(() => {
+      //   addChatForm.reset();
+      // })
+      // .catch((err) => {
+      //   console.log(err.message);
+      // })
+    // })
+
     // saving the chat document
-    const response =  this.chats.add(chat);
+    const response = this.addChat; 
     return response;
   }
+
 }
 
-
-
-
 const chatroom = new Chatroom ('gaming', 'Da vinci');
+// console.log(chatroom);
 
-chatroom.addChat('hello everyone')
+
+chatroom.addChat('hello humans')
   .then(() => {
     console.log('chat added');
   })
@@ -61,10 +88,6 @@ chatroom.addChat('hello everyone')
   })
 
 
-
-// Adding new chat documents to the chat collection
-
-// Setting up a real-time listener to get new chats
 
 // Updating the username
 

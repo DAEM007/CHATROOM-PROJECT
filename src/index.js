@@ -48,7 +48,7 @@ class Chatroom {
   }
   getChats(callback){
     // Setting up the query
-    const q = query(colRef, where('room', '==', this.room));
+    const q = query(colRef, where('room', '==', this.room), orderBy('created_at', 'desc'));
     // setting  up a real-time listener for the chats collection using the onSnapshot method
     onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {

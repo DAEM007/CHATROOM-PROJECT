@@ -60,6 +60,9 @@ class Chatroom {
       })
     })
   }
+  updateName(username){
+    this.username = username;
+  }
 }
 
 const chatroom = new Chatroom ('ninjas');

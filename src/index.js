@@ -1,8 +1,8 @@
-import { initializeApp } from "firebase/app";
+import { initializeApp, onLog } from "firebase/app";
 import { 
-  getFirestore, collection, onSnapshot,
+  getFirestore, collection, doc, onSnapshot,
   addDoc,
-  query,
+  query, where,
   orderBy, serverTimestamp
  } from "firebase/firestore";
 
@@ -24,20 +24,6 @@ const db = getFirestore();
 // init collection reference
 const colRef = collection(db, 'chats');
 
-// Queries
-const q = query(colRef, orderBy('createdAt'));
-
-// Setting up a real-time listener to get new chats
-onSnapshot(q, (snapshot) => {
-  let chats = [];
-  snapshot.docs.forEach((doc) => {
-    chats.push({ ...doc.data(), id: doc.id })
-  })
-  console.log(chats);
-});
-
-
-
 
 // CLASS OF CHATROOM
 class Chatroom {
@@ -48,44 +34,40 @@ class Chatroom {
   }
   //  Adding a new chat document to the chat collection
   async addChat(message){
-    // const addChatForm = document.querySelector('.new-chat');
-    // addChatForm.addEventListener('submit', e => {
-    //   e.preventDefault();
-
+    // using the addDoc method imported from firebase library
       addDoc(colRef, {
         // Format of a chat
-        // message: addChatForm.id.value,
         message: message,
         username: this.username,
         room: this.room,
         created_at: serverTimestamp()
       })
-      // .then(() => {
-      //   addChatForm.reset();
-      // })
-      // .catch((err) => {
-      //   console.log(err.message);
-      // })
-    // })
-
     // saving the chat document
     const response = this.addChat; 
     return response;
   }
-
+  getChats(callback){
+    // setting  up a real-time listener for the chats collection using the onSnapshot method
+    onSnapshot(colRef, (snapshot) => {
+      snapshot.docChanges().forEach((change) => {
+        if (change.type === "added"){
+          // UPDATE UI here...
+          callback(change.doc.data());
+          // console.log(change.doc.data());
+        }
+      })
+    })
+  }
 }
 
-const chatroom = new Chatroom ('gaming', 'Da vinci');
-// console.log(chatroom);
+const chatroom = new Chatroom ('music', 'Jon bellion');
 
+// chatroom.addChat('Yo! Anyone listened to all time low')
+// You can then add your then/catch methods here...
 
-chatroom.addChat('hello humans')
-  .then(() => {
-    console.log('chat added');
-  })
-  .catch((err) => {
-    console.log(err.message);
-  })
+// chatroom.getChats((data) => {
+//   console.log(data);
+// });
 
 
 

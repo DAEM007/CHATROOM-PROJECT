@@ -1,4 +1,4 @@
-import { initializeApp, onLog } from "firebase/app";
+import { initializeApp } from "firebase/app";
 import { 
   getFirestore, collection, doc, onSnapshot,
   addDoc,
@@ -31,6 +31,7 @@ class Chatroom {
     this.room = room;
     this.username = username;
     this.chats = colRef;
+    this.unsub;
   }
   //  Adding a new chat document to the chat collection
   async addChat(message){
@@ -50,7 +51,7 @@ class Chatroom {
     // Setting up the query
     const q = query(colRef, where('room', '==', this.room), orderBy('created_at', 'desc'));
     // setting  up a real-time listener for the chats collection using the onSnapshot method
-    onSnapshot(q, (snapshot) => {
+    this.unsub = onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added"){
           // UPDATE UI here...
@@ -61,21 +62,31 @@ class Chatroom {
     })
   }
   updateName(username){
+    // Updating the username
     this.username = username;
+  }
+  updateRoom(room){
+    // Updating the room
+    this.room = room;
+    console.log('chatroom updated!');
+    if(this.unsub){
+      this.unsub();
+    }
   }
 }
 
-const chatroom = new Chatroom ('ninjas');
-
-// chatroom.addChat('Yo! Anyone listened to all time low')
-// You can then add your then/catch methods here...
+const chatroom = new Chatroom ('music', 'Jon bellion');
 
 chatroom.getChats((data) => {
   console.log(data);
-});
+})
 
-
-
-// Updating the username
-
-// Updating the room
+// SET TIMEOUT!!!
+setTimeout(() => {
+  chatroom.updateRoom('ninjas');
+  chatroom.updateName('Sasuke');
+  chatroom.getChats((data) => {
+    console.log(data);
+  })
+  chatroom.addChat('Rasengan');
+}, 5000);

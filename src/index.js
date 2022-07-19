@@ -47,8 +47,10 @@ class Chatroom {
     return response;
   }
   getChats(callback){
+    // Setting up the query
+    const q = query(colRef, where('room', '==', this.room));
     // setting  up a real-time listener for the chats collection using the onSnapshot method
-    onSnapshot(colRef, (snapshot) => {
+    onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
         if (change.type === "added"){
           // UPDATE UI here...
@@ -60,14 +62,14 @@ class Chatroom {
   }
 }
 
-const chatroom = new Chatroom ('music', 'Jon bellion');
+const chatroom = new Chatroom ('ninjas');
 
 // chatroom.addChat('Yo! Anyone listened to all time low')
 // You can then add your then/catch methods here...
 
-// chatroom.getChats((data) => {
-//   console.log(data);
-// });
+chatroom.getChats((data) => {
+  console.log(data);
+});
 
 
 

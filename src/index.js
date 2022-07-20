@@ -1,3 +1,4 @@
+// ALL IMPORTS
 import { initializeApp } from "firebase/app";
 import { 
   getFirestore, collection, doc, onSnapshot,
@@ -5,7 +6,7 @@ import {
   query, where,
   orderBy, serverTimestamp
  } from "firebase/firestore";
-
+// FIREBASE CONFIG INCLUS=DING THE API KEY
 const firebaseConfig = {
   apiKey: "AIzaSyBl17u7Ro-0W-ikrlL98U9W3fUyuIGJbNM",
   authDomain: "chatroom-project-983d3.firebaseapp.com",
@@ -75,18 +76,11 @@ class Chatroom {
   }
 }
 
-const chatroom = new Chatroom ('music', 'Jon bellion');
+// CONT'D IN APP AND UI JS FILES
 
-chatroom.getChats((data) => {
-  console.log(data);
-})
+// play around
+// let a = 2;
+// let b = 'Hello';
 
-// SET TIMEOUT!!!
-setTimeout(() => {
-  chatroom.updateRoom('ninjas');
-  chatroom.updateName('Sasuke');
-  chatroom.getChats((data) => {
-    console.log(data);
-  })
-  chatroom.addChat('Rasengan');
-}, 5000);
+// console.log( a+=3 );
+// console.log( `Alright then gang ${b+= ' world!!!'}`);

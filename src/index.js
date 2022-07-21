@@ -27,7 +27,7 @@ const colRef = collection(db, 'chats');
 
 
 // CLASS OF CHATROOM
-class Chatroom {
+export class Chatroom {
   constructor(room, username){
     this.room = room;
     this.username = username;
@@ -75,12 +75,3 @@ class Chatroom {
     }
   }
 }
-
-// CONT'D IN APP AND UI JS FILES
-
-// play around
-// let a = 2;
-// let b = 'Hello';
-
-// console.log( a+=3 );
-// console.log( `Alright then gang ${b+= ' world!!!'}`);

@@ -50,7 +50,7 @@ export class Chatroom {
   }
   getChats(callback){
     // Setting up the query
-    const q = query(colRef, where('room', '==', this.room), orderBy('created_at', 'desc'));
+    const q = query(colRef, where('room', '==', this.room), orderBy('created_at', 'asc'));
     // setting  up a real-time listener for the chats collection using the onSnapshot method
     this.unsub = onSnapshot(q, (snapshot) => {
       snapshot.docChanges().forEach((change) => {

@@ -1,5 +1,5 @@
 //Render chat templates to the DOM
-// Clear the list of chats (when the room changes)
+// Clear the list of chats (when the room changes)list-group-item
 
 // ALL IMPORTS
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'

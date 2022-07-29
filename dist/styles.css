@@ -1,27 +1,33 @@
 body {
-    background: rgb(235, 233, 210);
+    background: rgb(252, 250, 250);
 }
 
-.container{
+.container {
     max-width: 600px;
 }
 
-.btn{
-    background: #435fd9;
+.btn {
+    background: hsl(229, 66%, 56%);
     color: white;
     outline: none !important;
     box-shadow: none !important;
 }
 
-.btn:focus{
+.btn:focus {
     outline: none !important;
 }
 
-.username{
+.list-group-item {
+    background: rgb(255, 255, 255);
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.username {
     font-weight: bold;
 }
 
-.time{
+.time {
     font-size: 0.7em;
-    color: #999;
+    color: hsl(0, 5%, 44%);
 }

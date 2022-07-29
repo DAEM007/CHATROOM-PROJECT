@@ -13,4 +13,3 @@ chatroom.getChats((data) => {
   chatUI.render(data);
 })
 
-

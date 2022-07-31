@@ -34,6 +34,8 @@ newNameForm.addEventListener('submit', e => {
   newNameForm.reset();
   // show then hide the updated name as a mssg for a few secs...
   updateMssg.innerText = `Your name was updated to ${newName}`;
+  // using the set timeout function to hide the updated text
+ setTimeout(() => updateMssg.innerText = '', 3000)
 
 });
 

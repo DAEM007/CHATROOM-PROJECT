@@ -1,6 +1,3 @@
-//Render chat templates to the DOM
-// Clear the list of chats (when the room changes)list-group-item
-
 // ALL IMPORTS
 import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 
@@ -8,6 +5,9 @@ import formatDistanceToNow from 'date-fns/formatDistanceToNow'
 export class ChatUI {
     constructor(list){
         this.list = list;
+    }
+    clear(){
+        this.list.innerHTML = '';
     }
     render(data){
         const when = formatDistanceToNow(

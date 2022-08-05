@@ -1,5 +1,4 @@
 // ALL IMPORTS
-import { relativeTimeRounding } from "moment";
 import { Chatroom } from "./index";
 import { ChatUI } from "./ui";
 
@@ -8,6 +7,18 @@ const chatList = document.querySelector('.chat-list');
 const newChatForm = document.querySelector('.new-chat');
 const newNameForm = document.querySelector('.new-name');
 const updateMssg = document.querySelector('.update-mssg');
+const rooms = document.querySelector('.chat-rooms');
+
+// Update the rooms when each room buttons are clicked...
+rooms.addEventListener('click', e => {
+  if(e.target.tagName === 'BUTTON'){
+    chatUI.clear()
+    chatroom.updateRoom(e.target.getAttribute('id'));
+    chatroom.getChats(chat => {
+      chatUI.render(chat);
+    })
+  }
+});
 
 // ADDING NEW CHATS TO BE DISPLAYED IN THE UI
 newChatForm.addEventListener('submit', e => {
@@ -42,7 +53,6 @@ newNameForm.addEventListener('submit', e => {
 
 // CHECK LOCAL STORAGE FOR A NAME
 const username = localStorage.getItem('username') ? localStorage.username : 'Anonymous';
-
 
 // CLASS INSTANCES
 const chatUI = new ChatUI (chatList);

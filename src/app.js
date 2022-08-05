@@ -1,4 +1,5 @@
 // ALL IMPORTS
+import { relativeTimeRounding } from "moment";
 import { Chatroom } from "./index";
 import { ChatUI } from "./ui";
 
@@ -40,7 +41,8 @@ newNameForm.addEventListener('submit', e => {
 });
 
 // CHECK LOCAL STORAGE FOR A NAME
-const username = localStorage.username ? localStorage.username : 'Anonymous';
+const username = localStorage.getItem('username') ? localStorage.username : 'Anonymous';
+
 
 // CLASS INSTANCES
 const chatUI = new ChatUI (chatList);
@@ -50,4 +52,5 @@ const chatroom = new Chatroom ('ninjas', username);
 chatroom.getChats((data) => {
   chatUI.render(data);
 })
+
 

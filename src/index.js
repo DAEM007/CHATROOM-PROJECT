@@ -24,10 +24,6 @@ const db = getFirestore();
 
 // init collection reference
 const colRef = collection(db, 'chats');
-
- 
-
-
 // CLASS OF CHATROOM
 export class Chatroom {
   constructor(room, username){
@@ -78,4 +74,3 @@ export class Chatroom {
     }
   }
 }
-

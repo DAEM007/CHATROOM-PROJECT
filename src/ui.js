@@ -11,7 +11,7 @@ export class ChatUI {
     }
     render(data){
         const when = formatDistanceToNow(
-            data.created_at.toDate().getTime(), {addSuffix: true} 
+            data.created_at.toDate(), {addSuffix: true} 
         )
         const html = `
         <li class='list-group-item'>

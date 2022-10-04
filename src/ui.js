@@ -1,5 +1,6 @@
 // ALL IMPORTS
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import { formatDistanceToNow } from 'date-fns';
+
 
 // CLASS FOR THE CHAT UI
 export class ChatUI {
@@ -24,3 +25,4 @@ export class ChatUI {
         this.list.innerHTML += html;
     }
 }
+

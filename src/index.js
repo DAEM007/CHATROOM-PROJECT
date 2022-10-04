@@ -35,8 +35,9 @@ export class Chatroom {
   //  Adding a new chat document to the chat collection
   async addChat(message){
     // using the addDoc method imported from firebase library
+    // const now = new Date();
       addDoc(colRef, {
-        // Format of a chat
+        // Format of a chat object
         message: message,
         username: this.username,
         room: this.room,

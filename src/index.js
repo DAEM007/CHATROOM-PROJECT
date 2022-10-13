@@ -32,7 +32,7 @@ export class Chatroom {
     this.chats = colRef;
     this.unsub;
   }
-  //  Adding a new chat document to the chat collection
+  //  Adding a new chat document to the chat collection in the firebase store
   async addChat(message){
     // using the addDoc method imported from firebase library
     const now = new Date();
@@ -48,6 +48,7 @@ export class Chatroom {
     const response = this.addChat; 
     return response;
   }
+  //getting the chats from the chat collection in the firebase store
   getChats(callback){
     // Setting up the query
     const q = query(colRef, where('room', '==', this.room), orderBy('created_at', 'asc'));
@@ -62,11 +63,13 @@ export class Chatroom {
       })
     })
   }
+  //update the user name in the UI
   updateName(username){
     // Updating the username
     this.username = username;
     localStorage.setItem('username', username);
   }
+  //update the room in the UI
   updateRoom(room){
     // Updating the room
     this.room = room;

@@ -11,13 +11,16 @@ export class ChatUI {
         this.list.innerHTML = '';
     }
     render(data){
+        const Date = data.created_at;
         const when = formatDistanceToNow(
-            data.created_at.toDate(), {addSuffix: true} 
+            Date.toDate(), {addSuffix: true} 
         )
         const html = `
         <li class='list-group-item'>
-            <span class='username'>${data.username}</span>
-            <span class='message'>${data.message}</span>
+            <div class="username-message">
+                <span class='username'>${data.username}</span>
+                <span class='message'>${data.message}</span>
+            </div>
             <div class='time'>${when}</div>
         </li>
         `;

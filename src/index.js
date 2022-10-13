@@ -4,9 +4,9 @@ import {
   getFirestore, collection, doc, onSnapshot,
   addDoc,
   query, where,
-  orderBy, serverTimestamp
+  orderBy, Timestamp
  } from "firebase/firestore";
-// FIREBASE CONFIG INCLUS=DING THE API KEY
+// FIREBASE CONFIG INCLUDING THE API KEY
 const firebaseConfig = {
   apiKey: "AIzaSyBl17u7Ro-0W-ikrlL98U9W3fUyuIGJbNM",
   authDomain: "chatroom-project-983d3.firebaseapp.com",
@@ -35,13 +35,14 @@ export class Chatroom {
   //  Adding a new chat document to the chat collection
   async addChat(message){
     // using the addDoc method imported from firebase library
-    // const now = new Date();
-      addDoc(colRef, {
+    const now = new Date();
+      await addDoc(colRef, {
         // Format of a chat object
         message: message,
         username: this.username,
         room: this.room,
-        created_at: serverTimestamp()
+        created_at: Timestamp.fromDate(now)
+        // created_at: Timestamp.now() ==== This would also work as the above
       })
     // saving the chat document
     const response = this.addChat; 

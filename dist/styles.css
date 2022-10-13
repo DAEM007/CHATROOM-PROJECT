@@ -20,7 +20,12 @@ body {
 .list-group-item {
     background: rgb(255, 255, 255);
     margin-bottom: 5px;
-    border-radius: 5px;
+    border-radius: 7px;
+}
+
+.username-message{
+    display: flex;
+    justify-content: space-between;
 }
 
 .username {
@@ -30,4 +35,5 @@ body {
 .time {
     font-size: 0.7em;
     color: hsl(0, 5%, 44%);
+    text-align: right;
 }

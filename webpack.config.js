@@ -8,15 +8,6 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'bundle.js',
   },
-  devtool: 'eval-source-map',
-    // Do not need to watch for instant changes since you are already using webpack-dev-server instead ise the below
-    devServer: {
-      static: {
-        directory: path.join(__dirname, 'dist'),
-      },
-      compress: true,
-      port: 9000,
-    },
     //webpack should watch for instant changes
     watch: true
 };
